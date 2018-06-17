@@ -1,0 +1,87 @@
+
+<!doctype html>
+<html lang="en">
+{% load staticfiles %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Blogs</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="album.css" rel="stylesheet">
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="{% url 'home' %}">Husain</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Twitter</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% static 'resume.pdf' %}">Resume</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'allblogs' %}">Blog</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<main role="main">
+
+    <div class="container">
+        <h1 class="text-center pt-3">All Blogs</h1>
+        <br>
+        <h3>Latest Blogs</h3>
+        <hr>
+
+        {% for blog in blogs.all %}
+
+            <div class="card flex-md-row mb-4 box-shadow h-md-250">
+                <div class="card-body d-flex flex-column align-items-start">
+                    <h3 class="mb-0">
+                        <a class="text-dark" href="{% url 'blogdetail' blog.id %}">{{ blog.title }}</a>
+                    </h3>
+                    <div class="mb-1 text-muted">{{ blog.date_short }}</div>
+                    <p class="card-text mb-auto">{{ blog.summary }}</p>
+                    <a href="{% url 'blogdetail' blog.id %}">Continue reading</a>
+                </div>
+                <img class="card-img-right flex-auto d-none d-lg-block" data-src="holder.js/200x250?theme=thumb" alt="Thumbnail [200x250]" style="width: 200px; height: 250px;" src="{{ blog.image.url }}" data-holder-rendered="true">
+            </div>
+
+        {% endfor %}
+    </div>
+
+
+
+
+</main>
+
+<footer class="text-muted">
+    <div class="container text-center">
+        <p>©️ Husain Ebrahim {% now "Y" %}</p>
+    </div>
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+</body>
+</html>
